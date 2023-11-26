@@ -9,6 +9,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"syscall"
 
 	"github.com/Cyberax/go-nfs-client/nfs4"
 )
@@ -20,8 +21,8 @@ func main() {
 
 	localPort := flag.Int("port", 0, "Local port to use for NFS connection")
 	server := flag.String("server", "", "NFS server to connect to")
-	uid := flag.Int("uid", 0, "UID to use for operations")
-	gid := flag.Int("gid", 0, "GID to use for operations")
+	uid := flag.Int("uid", syscall.Getuid(), "UID to use for operations")
+	gid := flag.Int("gid", syscall.Getgid(), "GID to use for operations")
 	machineName := flag.String("machine", hostname, "Machine name to use for operations")
 	flag.Parse()
 
