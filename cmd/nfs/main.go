@@ -25,6 +25,12 @@ func main() {
 	machineName := flag.String("machine", hostname, "Machine name to use for operations")
 	flag.Parse()
 
+	if server == nil || *server == "" {
+		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
+		flag.PrintDefaults()
+		os.Exit(1)
+	}
+
 	client, err := nfs4.NewNfsClient(ctx, *localPort, *server, nfs4.AuthParams{
 		Uid:         uint32(*uid),
 		Gid:         uint32(*gid),
