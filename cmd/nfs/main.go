@@ -61,6 +61,10 @@ func main() {
 		},
 
 		"ls": func(args []string) error {
+			if len(args) != 0 {
+				return errors.New("ls does not take arguments")
+			}
+
 			entries, err := client.GetFileList(currentPath)
 			if err != nil {
 				return err
